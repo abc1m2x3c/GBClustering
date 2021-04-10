@@ -1,4 +1,5 @@
 #functions
+#asdf
 
 #data generation
 data.generate<-function(I,J,L,B,K,gamma_O,p_cluster,alpha_M,alpha_F,beta_M,beta_F,beta_O,beta_M_B,beta_F_B,beta_O_B){
