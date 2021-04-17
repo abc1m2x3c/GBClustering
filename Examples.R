@@ -1,7 +1,7 @@
 #clear the memory
 rm(list=ls(all=TRUE))
 
-source('functions.R')
+source('src.R')
 library(maxLik)
 
 #load the coordinates data
