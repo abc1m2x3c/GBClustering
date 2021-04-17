@@ -117,7 +117,7 @@ res.approach2=GBClust(mother=mother,father=father,child=child,K=4,max.iter=100,b
 ```
 The cluster assignments can be assessed using the following command.
 ```
-res.approach1$cluster.assignment
+res.approach2$cluster.assignment
 ```
 Below is the first 6 lines:
 ```
@@ -131,7 +131,7 @@ Below is the first 6 lines:
 ```
 The coefficients of each cluster can be obtained by
 ```
-res.approach1$Coef
+res.approach2$Coef
 ```
 The result is
 ```
