@@ -44,8 +44,31 @@ K_vec=3:6
 #map.data: coodinates information
 #neighbor.corr.cutoff: the correlation threshold of neighboring CpGs to form a block
 BIC.value.approach1=GBClust.screeplot(mother=mother,father=father,child=child,K_vec,max.iter=100,block.method='distance',by_dataset='child',map.data=map.data,neighbor.corr.cutoff=0.7)
+
+#scree plot
+plot(K_vec,BIC.value.approach1,type='l',xlab='',ylab='',main=paste('BIC scree plot'),lty=1,col=1)
+points(K_vec,BIC.value.approach1,pch=1,col=1)
+title(ylab="BIC", cex.lab=1.2)
+title(xlab="K", cex.lab=1.2)
 '''
 In this example, we check the BIC values of K=3,4,5,6. The output is shown below.
-The sample output is shown below. It is a 3D plot that can be rotated interactively using R command 'plot3D'.
-![]
-(https://github.com/abc1m2x3c/GBClustering/blob/master/Approach1.png)
+![Optional Text](https://github.com/abc1m2x3c/GBClustering/blob/master/Approach1.png)
+One can see that the turning point of BIC values is K=4, which is the true K when we simulated the data. Next, we use the following code to identify the patterns of CpG sites.
+'''
+res.approach1=GBClust(mother=mother,father=father,child=child,K=4,max.iter=100,block.method='distance',by_dataset='child',map.data=map.data,neighbor.corr.cutoff=0.7)
+'''
+The cluster assignments can be assessed in 
+'''
+res.approach1$cluster.assignment
+'''
+Below is the first 6 lines:
+'''
+         CpG Cluster
+1 cg00012362       3
+2 cg00019366       2
+3 cg00019759       3
+4 cg00026919       4
+5 cg00030627       2
+6 cg00034130       3
+'''
+The 
