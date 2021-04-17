@@ -95,9 +95,9 @@ K_vec=3:6
 #block.method: block-partition method
 #by_dataset: Based on which dataset (mother, father, or child) to partition the blocks
 #kmean.num: number of kmean clusters. Recommend J/2=5000/2=2500
-kmean.nstart: Parameter for 'kmeans' function. Recommend 50.
-kmean.iter.max: Parameter for 'kmeans' function. Recommend 50.
-kmean.block.cutoff: The threshold of the average pairwise correlation aming CpGs in the same kmean cluster to determine whether the kmean cluster is a block. Recomend 0.7.
+#kmean.nstart: Parameter for 'kmeans' function. Recommend 50.
+#kmean.iter.max: Parameter for 'kmeans' function. Recommend 50.
+#kmean.block.cutoff: The threshold of the average pairwise correlation aming CpGs in the same kmean cluster to determine whether the kmean cluster is a block. Recomend 0.7.
 BIC.value.approach2=GBClust.screeplot(mother=mother,father=father,child=child,K_vec,max.iter=100,block.method='correlation',by_dataset='child',kmean.num=2500,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7)
 
 #scree plot
