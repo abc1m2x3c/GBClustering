@@ -1,4 +1,4 @@
-#data generation
+#data generation for simulation
 data.generate<-function(I,J,L,B,K,gamma_O,p_cluster,alpha_M,alpha_F,beta_M,beta_F,beta_O,beta_M_B,beta_F_B,beta_O_B){
   cluster_assign=rep(0,J)
   #initialize alpha_O
@@ -23,13 +23,8 @@ data.generate<-function(I,J,L,B,K,gamma_O,p_cluster,alpha_M,alpha_F,beta_M,beta_
     # the generation of Y_M_sub is a bit tricky, since s*gamma(alpha,beta)=gamma(s*alpha,beta),
     # we can
     Y_M_sub=matrix(rgamma(I,beta_M_B[b],rep(1,I)),nrow=I,ncol=L,byrow=FALSE) 
-    #check:
-    #colMeans(X_M_sub)
-    #alpha_M_sub
     Z1_sub=X_M_sub/(X_M_sub+Y_M_sub)
-    #colMeans(Z1)
-    #alpha_M/(beta_M+alpha_M)
-    
+
     X_F_sub=matrix(rgamma(I*L,alpha_F_sub,rep(1,L)),nrow=I,ncol=L,byrow=TRUE)
     Y_F_sub=matrix(rgamma(I,beta_F_B[b],rep(1,I)),nrow=I,ncol=L,byrow=FALSE)
     Z2_sub=X_F_sub/(X_F_sub+Y_F_sub)
@@ -52,9 +47,8 @@ data.generate<-function(I,J,L,B,K,gamma_O,p_cluster,alpha_M,alpha_F,beta_M,beta_
 
 
 
-
 #data correlation
-#use very large I to find out the correlation in neighbering CpG sites
+#use very large I to find out the correlation in neighboring CpG sites
 #specifically, the correlation between X_1/(X_1+Y) and X_2/(X_2+Y), 
 #where X_1 ~ gamma(alpha_1,1), X_2 ~ gamma(alpha_2,1), Y ~ gamma(beta,1)
 data.correlation<-function(I,alpha_1,alpha_2,beta){
@@ -65,6 +59,7 @@ data.correlation<-function(I,alpha_1,alpha_2,beta){
   return (res)
 }
 
+#fast calculation of correlation between columns between two big matrix X and Y
 colCors = function(x, y) {
   sqr = function(x) x*x
   if(!is.matrix(x)||!is.matrix(y)||any(dim(x)!=dim(y)))
@@ -76,12 +71,9 @@ colCors = function(x, y) {
 }
 
 
-
+#stochastic EM 
 fit.D.realdata<-function(cluster.data,K,initial,start.loc.B,end.loc.B,mle.est,max.iter){
-  
   B=length(start.loc.B)
-  
-  #constant variables
   y  = cluster.data[[1]]
   Z1 = cluster.data[[2]]
   Z2 = cluster.data[[3]]
@@ -251,7 +243,7 @@ fit.D.realdata<-function(cluster.data,K,initial,start.loc.B,end.loc.B,mle.est,ma
   return (list(S.new,gamma.O.new,iter,llk.new,record.llk))
 } 
 
-
+#the likelihood function for Z1 and Z2
 llk.Z1Z2.realdata<-function(cluster.data,mle.est,start.loc.B,end.loc.B){
   B=length(start.loc.B)
   y  = cluster.data[[1]]
@@ -333,7 +325,7 @@ llk.Z1Z2.realdata<-function(cluster.data,mle.est,start.loc.B,end.loc.B){
 }
 
 
-# ######################################################
+#calculate the MLE for alpha, beta's######################################################
 #If the block size is larger than 1, then use MLE
 #If the block size is equal to 1, then use method of moment to get the estimation
 MLE.nuisance.param.B<-function(cluster.data,start.mle.est,start.loc.B,end.loc.B){
@@ -538,8 +530,6 @@ form.block.by_corr<-function(mo,fa,chd,by_dataset='child',num_kmean,kmean.nstart
       temp[j]=cor(Z1[,rd.ind[1]],Z1[,rd.ind[2]])
     }
     record_cor[i]=mean(temp)
-    # rd.ind=c(start.loc.num_kmean[block.index[i]],end.loc.num_kmean[block.index[i]])
-    # record_cor[i]=cor(Z1[,rd.ind[1]],Z1[,rd.ind[2]])
   }
   
   #further filter blocks with correlation stronger than block.cutoff
