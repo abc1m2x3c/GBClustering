@@ -37,14 +37,14 @@ res.approach1$Coef
 #Approach 2: Partition blocks based on observed correlation through k-means clustering
 
 K_vec=3:6
-BIC.value.approach2=GBClust.screeplot(mother=mother,father=father,child=child,K_vec,max.iter=100,block.method='correlation',by_dataset='child',map.data,neighbor.corr.cutoff=0.7,kmean.num=2500,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7)
+BIC.value.approach2=GBClust.screeplot(mother=mother,father=father,child=child,K_vec,max.iter=100,block.method='correlation',by_dataset='child',kmean.num=2500,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7)
 
 plot(K_vec,BIC.value.approach2,type='l',xlab='',ylab='',main=paste('BIC scree plot'),lty=1,col=1)
 points(K_vec,BIC.value.approach2,pch=1,col=1)
 title(ylab="BIC", cex.lab=1.2)
 title(xlab="K", cex.lab=1.2)
 
-res.approach2=GBClust(mother=mother,father=father,child=child,K=4,max.iter=100,block.method='correlation',by_dataset='child',map.data,neighbor.corr.cutoff=0.7,kmean.num=2500,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7)
+res.approach2=GBClust(mother=mother,father=father,child=child,K=4,max.iter=100,block.method='correlation',by_dataset='child',kmean.num=2500,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7)
 
 head(res.approach2$cluster.assignment)
 res.approach2$Coef
