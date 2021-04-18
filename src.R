@@ -857,6 +857,9 @@ GBClust<-function(mother,father,child,K,max.iter=100,block.method='distance',by_
   cluster.assignment=cluster.assignment[order(cluster.assignment$CpG),]
   rownames(cluster.assignment)=NULL
   
+  final_coef_mat=cbind(seq(1,K),final_coef_mat)
+  colnames(final_coef_mat)=c('cluster','gamma0','gamma1','gamma2')
+  
   Coef=final_coef_mat
   
   return (list(cluster.assignment=cluster.assignment, Coef=Coef))
