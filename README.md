@@ -5,7 +5,7 @@ The necessary source code is src.R. Please download it to your working directory
 
 
 ## A simple example 
-Below is an example of R codes to manually input and analyze a DNA methylation data set. The DNA data presented in the paper is not publicly available. To demonstrate the use of the program. We simulated the mother, father, and offspring's DNA methylation of 5000 CpG sites from 50 families stored in 'mother.csv', 'father.csv', and 'offspring.csv', sepretately. The true number of clusters equals 4.
+Below is an example of R codes to manually input and analyze a DNA methylation data set. You can also find the integrated codes in 'Example.R' in this repository. The DNA data presented in the paper is not publicly available. To demonstrate the use of the program. We simulated the mother, father, and offspring's DNA methylation of 5000 CpG sites from 50 families stored in 'mother.csv', 'father.csv', and 'offspring.csv', sepretately. The true number of clusters equals 4.
 
 We also generated a dataset 'Coordinates.csv' that stores the CpG names, Chromosome numbers, and Chromosomal Coordinates of the 5000 CpGs. Please also download these files to your working directory if you want to test this example.
 
@@ -117,7 +117,7 @@ res.approach2=GBClust(mother=mother,father=father,child=child,K=4,max.iter=100,b
 ```
 The cluster assignments can be assessed using the following command.
 ```
-res.approach1$cluster.assignment
+res.approach2$cluster.assignment
 ```
 Below is the first 6 lines:
 ```
@@ -131,7 +131,7 @@ Below is the first 6 lines:
 ```
 The coefficients of each cluster can be obtained by
 ```
-res.approach1$Coef
+res.approach2$Coef
 ```
 The result is
 ```
