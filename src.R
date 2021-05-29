@@ -20,8 +20,6 @@ data.generate<-function(I,J,L,B,K,gamma_O,p_cluster,alpha_M,alpha_F,beta_M,beta_
     alpha_O_sub=exp(rowSums(temp_A*temp_B)+log(beta_O_sub))
     rm(temp_A,temp_B)
     X_M_sub=matrix(rgamma(I*L,alpha_M_sub,rep(1,L)),nrow=I,ncol=L,byrow=TRUE)
-    # the generation of Y_M_sub is a bit tricky, since s*gamma(alpha,beta)=gamma(s*alpha,beta),
-    # we can
     Y_M_sub=matrix(rgamma(I,beta_M_B[b],rep(1,I)),nrow=I,ncol=L,byrow=FALSE) 
     Z1_sub=X_M_sub/(X_M_sub+Y_M_sub)
 
@@ -513,10 +511,6 @@ form.block.by_corr<-function(mo,fa,chd,by_dataset='child',num_kmean,kmean.nstart
   start.loc.num_kmean=c(1,(cumsum(Block.table)+1)[1:(num_kmean-1)]) #start location for each block
   names(start.loc.num_kmean)=1:num_kmean
   
-  #rm(Block.ID)#remove some useless variable
-  
-  
-  
   #filter block of size between 2 and 30
   block.index=which( Block.table>1)
   length(block.index)
@@ -746,11 +740,6 @@ GBClust.screeplot<-function(mother,father,child,K_vec=3:6,max.iter=100,block.met
   
   return (BIC_record)
 }
-# BIC_record=GBClust.screeplot(Z1,Z2,y,K_vec)
-# plot(K_vec,BIC_record,type='l',xlab='',ylab='',main=paste('BIC scree plot'),lty=1,col=1)
-# points(K_vec,BIC_record,pch=1,col=1)
-# title(ylab="BIC", cex.lab=1.2)
-# title(xlab="K", cex.lab=1.2)
 
 
 GBClust<-function(mother,father,child,K,max.iter=100,block.method='distance',by_dataset='child',map.data,neighbor.corr.cutoff=0.7,kmean.num,kmean.nstart=50,kmean.iter.max=50,kmean.block.cutoff=0.7){
