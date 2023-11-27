@@ -1,5 +1,4 @@
 # GBClustering
-This repository contains R codes and examples for 'Identifying intergenerational patterns of correlated methylation sites'
 
 The necessary source code is src.R. Please download it to your working directory of R or Rstudio.
 
